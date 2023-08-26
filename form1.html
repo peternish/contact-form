@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Application Form</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(45deg, #f3f3f3, #e6e6e6);
+            margin: 0;
+            padding: 40px;
+        }
+
+        form {
+            max-width: 800px;
+            margin: auto;
+            background: #ffffff;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+        }
+
+        h1 {
+            color: #333;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+            color: #555;
+            margin: 10px 0;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="date"],
+        input[type="tel"],
+        select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+            transition: border 0.3s;
+        }
+
+        input[type="text"]:focus,
+        input[type="email"]:focus,
+        input[type="date"]:focus,
+        input[type="tel"]:focus,
+        select:focus {
+            border: 1px solid #007BFF;
+        }
+
+        input[type="radio"] {
+            margin-right: 10px;
+        }
+
+        button,
+        input[type="submit"] {
+            display: block;
+            padding: 10px 20px;
+            width: 100%;
+            border: none;
+            background: linear-gradient(45deg, #007BFF, #0056b3);
+            color: white;
+            cursor: pointer;
+            border-radius: 5px;
+            font-size: 16px;
+            margin-top: 20px;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+
+        button:hover,
+        input[type="submit"]:hover {
+            background: linear-gradient(45deg, #0056b3, #003f8a);
+            transform: scale(1.02);
+        }
+
+        fieldset {
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 20px;
+            margin-bottom: 30px;
+        }
+
+        legend {
+            font-weight: bold;
+            color: #007BFF;
+        }
+.horizontal-radio {
+    display: inline-block;
+    margin-right: 15px;
+} 
+</style>
+<script>
+        var dependentCount = 0;
+        function addSpouse() {
+            var spouseSection = document.getElementById("spouseSection");
+            if (spouseSection.style.display === "none") {
+                spouseSection.style.display = "block";
+                spouseSection.innerHTML = `
+               <legend>Spouse</legend>
+        <button type="button" onclick="removeSpouse()">Remove Spouse</button>
+                <label for="spouseFirstName">First Name:</label>
+                <input type="text" id="spouseFirstName" name="spouseFirstName"><br><br>
+                <label for="spouseLastName">Last Name:</label>
+                <input type="text" id="spouseLastName" name="spouseLastName"><br><br>
+                <label for="spouseGender">Gender:</label>
+<select id="spouseGender" name="spouseGender">
+    <option value="" disabled selected>Select</option>
+    <option value="male">Male</option>
+    <option value="female">Female</option>
+</select><br><br>
+                <label for="spouseDob">DOB:</label>
+                <input type="date" id="spouseDob" name="spouseDob"><br><br>
+                <label for="spouseStateOfBirth">State of Birth:</label>
+                <input type="text" id="spouseStateOfBirth" name="spouseStateOfBirth"><br><br>
+                <label for="spouseHeight">Height:</label>
+                <input type="text" id="spouseHeight" name="spouseHeight"><br><br>
+                <label for="spouseWeight">Weight:</label>
+                <input type="text" id="spouseWeight" name="spouseWeight"><br><br>
+                <label for="spouseEmployer">Employer:</label>
+                <input type="text" id="spouseEmployer" name="spouseEmployer"><br><br>
+                <label for="spouseOccupationDuties">Occupation/Duties:</label>
+                <input type="text" id="spouseOccupationDuties" name="spouseOccupationDuties"><br><br>
+                <label for="spouseSsn">SSN:</label>
+                <input type="text" id="spouseSsn" name="spouseSsn"><br><br>
+                <label for="spouseTobacco24">Tabacco within the past 24 months?</label>
+                <input type="radio" id="spouseYesTobacco24" name="spouseTobacco24" value="yes">
+                <label for="spouseYesTobacco24">Yes</label>
+                <input type="radio" id="spouseNoTobacco24" name="spouseTobacco24" value="no">
+                <label for="spouseNoTobacco24">No</label><br><br>`;
+            } else {
+                removeSpouse(); // Use the removeSpouse function here
+		spouseSection.style.display = "none";
+                spouseSection.innerHTML = "";
+            }
+        }
+function removeSpouse() {
+    var spouseSection = document.getElementById("spouseSection");
+    spouseSection.style.display = "none";
+    spouseSection.innerHTML = "";
+}
+
+        function addDependent() {
+            dependentCount++;
+            var dependentsSection = document.getElementById("dependentsSection");
+            dependentsSection.style.display = "block";
+            dependentsSection.innerHTML += `
+             <fieldset id="dependent${dependentCount}">   
+<legend>Dependent ${dependentCount}</legend>
+<button type="button" onclick="removeDependent(${dependentCount})">Remove Dependent</button>
+                <label for="firstName">First Name:</label>
+                <input type="text" id="firstNameDependent${dependentCount}" name="firstNameDependent${dependentCount}"><br><br>
+                <label for="lastName">Last Name:</label>
+                <input type="text" id="lastNameDependent${dependentCount}" name="lastNameDependent${dependentCount}"><br><br>
+<label for="gender">Gender:</label>
+<select id="genderDependent${dependentCount}" name="genderDependent${dependentCount}">
+    <option value="" disabled selected>Select</option>
+    <option value="male">Male</option>
+    <option value="female">Female</option>
+</select><br><br>
+
+                <label for="dob">DOB:</label>
+                <input type="date" id="dobDependent${dependentCount}" name="dobDependent${dependentCount}"><br><br>
+                <label for="height">Height:</label>
+                <input type="text" id="heightDependent${dependentCount}" name="heightDependent${dependentCount}"><br><br>
+                <label for="weight">Weight:</label>
+                <input type="text" id="weightDependent${dependentCount}" name="weightDependent${dependentCount}"><br><br>
+                <label for="tobacco24">Tabacco within the past 24 months?</label>
+                <input type="radio" id="yesTobacco24Dependent${dependentCount}" name="tobacco24Dependent${dependentCount}" value="yes">
+                <label for="yesTobacco24Dependent${dependentCount}">Yes</label>
+                <input type="radio" id="noTobacco24Dependent${dependentCount}" name="tobacco24Dependent${dependentCount}" value="no">
+                          <label for="noTobacco24Dependent${dependentCount}">No</label><br><br>
+            </fieldset>`;
+        }
+       function removeDependent(id) {
+    // Remove the specific dependent section
+    var dependentSection = document.getElementById(`dependent${id}`);
+    dependentSection.remove();
+    
+    // Rename the dependents that come after the removed dependent
+    for (var i = id + 1; i <= dependentCount; i++) {
+        var dependentSection = document.getElementById(`dependent${i}`);
+        dependentSection.id = `dependent${i - 1}`;
+        dependentSection.querySelector('legend').textContent = `Dependent ${i - 1}`;
+        
+        // Rename input fields as well
+        var inputFields = dependentSection.querySelectorAll('input, select');
+        for (var field of inputFields) {
+            var fieldName = field.name.replace(i, i - 1);
+            var fieldId = field.id.replace(i, i - 1);
+            field.name = fieldName;
+            field.id = fieldId;
+        }
+        
+        // Update removeDependent button
+        var removeButton = dependentSection.querySelector('button');
+        removeButton.setAttribute('onclick', `removeDependent(${i - 1})`);
+    }
+    
+    // Decrement dependentCount
+    dependentCount--;
+}
+
+    </script>
+</head>
+<body>
+    <h1>Application Form</h1>
+<form id="applicationForm">             
+        <fieldset>
+            <legend>Primary Applicant</legend>
+<label for="startDate">Requested Start Date:</label>
+            <input type="date" id="startDate" name="startDate"><br><br>
+            <label for="firstName">First Name:</label>
+            <input type="text" id="firstName" name="firstName"><br><br>
+            <label for="lastName">Last Name:</label>
+            <input type="text" id="lastName" name="lastName"><br><br>
+ <label for="gender">Gender:</label>
+<select id="gender" name="gender">
+    <option value="" disabled selected>Select</option>
+    <option value="male">Male</option>
+    <option value="female">Female</option>
+</select><br><br>
+<label for="height">Height:</label>
+            <input type="text" id="height" name="height"><br><br>
+            <label for="weight">Weight:</label>
+            <input type="text" id="weight" name="weight"><br><br>
+<label for="dob">DOB:</label>
+            <input type="date" id="dob" name="dob"><br><br>
+            <label for="stateOfBirth">State of Birth:</label>
+            <input type="text" id="stateOfBirth" name="stateOfBirth"><br><br>
+<label for="ssn">SSN:</label>
+            <input type="text" id="ssn" name="ssn" maxlength="9"><br><br>
+            <label for="employer">Employer:</label>
+            <input type="text" id="employer" name="employer"><br><br>
+            <label for="occupationDuties">Occupation/Duties:</label>
+            <input type="text" id="occupationDuties" name="occupationDuties"><br><br>
+            <label for="tobacco24" class="horizontal-radio">Tobacco within the past 24 months?</label>
+<input type="radio" id="yesTobacco24" name="tobacco24" value="yes" class="horizontal-radio">
+<label for="yesTobacco24" class="horizontal-radio">Yes</label>
+<input type="radio" id="noTobacco24" name="tobacco24" value="no" class="horizontal-radio">
+<label for="noTobacco24" class="horizontal-radio">No</label><br><br>
+            <label for="residentialAddress">Residential Street Address:</label>
+            <input type="text" id="residentialAddress" name="residentialAddress"><br><br>
+            <label for="city">City:</label>
+            <input type="text" id="city" name="city"><br><br>
+            <label for="state">State:</label>
+            <input type="text" id="state" name="state"><br><br>
+            <label for="zip">Zip:</label>
+            <input type="text" id="zip" name="zip" maxlength="5"><br><br>
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email"><br><br>
+            <label for="phone">Phone:</label>
+            <input type="tel" id="phone" name="phone"><br><br>
+
+        </fieldset>
+        <fieldset id="spouseSection" style="display:none;"></fieldset>
+        <button type="button" onclick="addSpouse()">Add/Remove Spouse</button>
+        <fieldset id="dependentsSection" style="display:none;"></fieldset>
+        <button type="button" onclick="addDependent()">Add Dependent</button>
+        <input type="submit" value="Submit">
+    </form>
+
+ <script>
+        // document.querySelector('form').addEventListener('submit', function(e) {
+        //     e.preventDefault(); // Prevent the default form submission
+            
+        //     // Retrieve the form data
+        //     var formData = new FormData(e.target);
+            
+        //     // Convert the FormData to an object
+        //     var formObject = Object.fromEntries(formData);
+
+        //     // Convert the object to a query string
+        //     var queryString = Object.keys(formObject).map(key => key + '=' + encodeURIComponent(formObject[key])).join('&');
+
+        //     // Redirect to the specified URL with the query string
+        //     window.location.href = "https://www.andersonhealthgrp.com/mlphi?" + queryString;
+        // });
+    </script>
+    <script
+        type="text/javascript"
+        src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"
+    ></script>
+
+    <script type="text/javascript">      
+        (function () {
+            emailjs.init("A50lpnF13ZR-C8m6D");
+        })();
+    </script>
+    <script>
+        document
+        .getElementById("applicationForm")
+        .addEventListener("submit", function (event) {
+          event.preventDefault();
+
+          const serviceID = "service_t96lxws";
+          const templateID = "template_68lxadp";
+
+          // send the email here
+          emailjs.sendForm(serviceID, templateID, '#applicationForm').then(
+            (response) => {
+              console.log("SUCCESS!", response.status, response.text);
+              alert("SUCCESS!");
+            },
+            (error) => {
+              console.log("FAILED...", error);
+              alert("FAILED...", error);
+            }
+          );
+        });
+    </script>
+</body>
+</html>

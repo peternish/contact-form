@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Medical History Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 20px;
+            line-height: 1.6;
+        }
+
+        h1 {
+            color: #007BFF;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        fieldset {
+            border: 2px solid #007BFF;
+            border-radius: 5px;
+            padding: 20px;
+            margin-bottom: 30px;
+            background-color: #fff;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+        }
+
+        legend {
+            font-weight: bold;
+            color: #007BFF;
+            padding: 5px;
+        }
+
+        label {
+            font-weight: bold;
+        }
+
+        input[type="text"]:focus,
+        input[type="email"]:focus,
+        input[type="date"]:focus,
+        input[type="tel"]:focus,
+        select:focus,
+        textarea:focus {
+            border: 2px solid #007BFF;
+        }
+
+        input[type="radio"] {
+            margin-right: 10px;
+        }
+
+        button,
+        input[type="submit"] {
+            display: block;
+            padding: 10px 20px;
+            width: 100%;
+            border: none;
+            background: linear-gradient(45deg, #007BFF, #0056b3);
+            color: white;
+            cursor: pointer;
+            border-radius: 5px;
+            font-size: 16px;
+            margin-top: 20px;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+
+        button:hover,
+        input[type="submit"]:hover {
+            background: linear-gradient(45deg, #0056b3, #003f8a);
+            transform: scale(1.05);
+        }
+
+        #drugs-table th,
+        #drugs-table td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid #ccc;
+        }
+
+        #drugs-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        #explanation {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-top: 10px;
+            background-color: #f9f9f9;
+        }
+
+        .warning-message {
+            color: red;
+            font-weight: bold;
+        }
+@media screen and (max-width: 768px) {
+            body {
+                margin: 10px;
+            }
+
+            fieldset {
+                padding: 10px;
+            }
+
+            button,
+            input[type="submit"] {
+                font-size: 14px;
+                padding: 8px 16px;
+            }
+        }
+        
+        /* Flexbox styling for better alignment */
+        .form-group {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            flex-basis: 30%;
+            font-weight: bold;
+        }
+
+        .form-group input,
+        .form-group select {
+            flex-basis: 65%;
+            padding: 5px;
+            border-radius: 5px;
+        }
+
+        /* Icon styling */
+        .form-group i {
+            flex-basis: 5%;
+            color: #007BFF;
+            cursor: pointer;
+        }
+
+        /* Tooltip styling */
+        .tooltip-text {
+            display: none;
+            background-color: #f9f9f9;
+            border: 1px solid #ccc;
+            padding: 5px;
+            position: absolute;
+            font-size: 14px;
+            border-radius: 5px;
+            color: #333;
+        }
+
+        .form-group i:hover + .tooltip-text {
+            display: block;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Medical History</h1>
+    <form id="historyForm">
+        <fieldset>
+<legend>Please list all drugs prescribed or taken in the last 12 months</legend>
+            <table id="drugs-table">
+                <tr>
+                    <th>Applicant</th>
+                    <th>Rx/Med & Mg</th>
+                    <th>Reason</th>
+                    <th>Doctor</th>
+                </tr>
+                <tr>
+                    <td><input type="text" name="applicant" required></td>
+                    <td><input type="text" name="rx_med_mg" required></td>
+                    <td><input type="text" name="reason" required></td>
+                    <td><input type="text" name="doctor" required></td>
+                </tr>
+            </table>
+            <button type="button" id="add-row">Add More</button>
+        </fieldset>
+
+        <!-- Rest of the form ... -->
+    
+
+    <script>
+        document.getElementById('add-row').addEventListener('click', function() {
+            var table = document.getElementById('drugs-table');
+            var row = table.insertRow(-1);
+            var cell1 = row.insertCell(0);
+            var cell2 = row.insertCell(1);
+            var cell3 = row.insertCell(2);
+            var cell4 = row.insertCell(3);
+
+            cell1.innerHTML = '<input type="text" name="applicant" required>';
+            cell2.innerHTML = '<input type="text" name="rx_med_mg" required>';
+            cell3.innerHTML = '<input type="text" name="reason" required>';
+            cell4.innerHTML = '<input type="text" name="doctor" required>';
+        });
+    </script>
+        
+        <fieldset>
+            <legend> General Information</legend>
+            <div class="form-section">            
+<!-- Question 1 -->
+<label for="q1">1. Within the past two years, has any person to be insured used tobacco products, including cigarettes, cigars, or chewing tobacco?</label><br>
+<input type="radio" id="q1-yes" name="q1" value="yes" onclick="toggleExplanation(1)">Yes
+<input type="radio" id="q1-no" name="q1" value="no" onclick="toggleExplanation(1)">No<br>
+<div id="q1-explanation" style="display:none;">
+    <textarea name="q1-explanation" rows="4" cols="50" placeholder="Please Explain"></textarea>
+</div>
+<br>
+<p>
+
+
+
+<!-- Question 2 -->
+<label for="q2">2. Has any person proposed for insurance had surgery within the last 5 years?</label><br>
+<input type="radio" id="q2-yes" name="q2" value="yes" onclick="toggleExplanation(2)">Yes
+<input type="radio" id="q2-no" name="q2" value="no" onclick="toggleExplanation(2)">No<br>
+<div id="q2-explanation" style="display:none;">
+    <textarea name="q2-explanation" rows="4" cols="50" placeholder="Please Explain"></textarea>
+</div>
+<br>
+
+<p>
+       
+<label for="q3">3. To the best of your knowledge and belief, within the last 12 months, has any person to be insured, received treatment or had tests performed where the results were other than normal or still pending or received treatment for any abnormal tests?</label><br>
+<input type="radio" id="q3-yes" name="q3" value="yes" onclick="toggleExplanation(3)">Yes
+<input type="radio" id="q3-no" name="q3" value="no" onclick="toggleExplanation(3)">No<br>
+<div id="q3-explanation" style="display:none;">
+    <textarea name="q3-explanation" rows="4" cols="50" placeholder="Please Explain"></textarea>
+</div>
+<br>
+
+<p>
+
+<label for="q4">4. Has any person had surgery advised but not yet performed?</label><br>
+<input type="radio" id="q4-yes" name="q4" value="yes" onclick="toggleExplanation(4)">Yes
+<input type="radio" id="q4-no" name="q4" value="no" onclick="toggleExplanation(4)">No<br>
+<div id="q4-explanation" style="display:none;">
+    <textarea name="q4-explanation" rows="4" cols="50" placeholder="Please Explain"></textarea>
+</div>
+<br>
+
+<p>
+
+        <label for="q5">5. To the best of your knowledge and belief, within the last 12 months, has any person to be insured had elevated or rising prostate specific-antigen (PSA) or carcinoembryonic antigen (CEA) test, abnormal mammogram, abnormal pap smear, or abnormal biopsy?</label><br>
+<input type="radio" id="q5-yes" name="q5" value="yes" onclick="toggleExplanation(5)">Yes
+<input type="radio" id="q5-no" name="q5" value="no" onclick="toggleExplanation(5)">No<br>
+<div id="q5-explanation" style="display:none;">
+    <textarea name="q5-explanation" rows="4" cols="50" placeholder="Please Explain"></textarea>
+</div>
+<br>
+
+<p>
+
+<label for="q6">6. Is any person to be insured currently hospitalized or scheduled for hospitalization in the next 12 months?</label><br>
+<input type="radio" id="q6-yes" name="q6" value="yes" onclick="toggleExplanation(6)">Yes
+<input type="radio" id="q6-no" name="q6" value="no" onclick="toggleExplanation(6)">No<br>
+<div id="q6-explanation" style="display:none;">
+    <textarea name="q6-explanation" rows="4" cols="50" placeholder="Please Explain"></textarea>
+</div>
+<br>
+
+<p>
+
+<label for="q7">7. Has any person to be insured ever been diagnosed with or treated for HIV/AIDS or other sexually transmitted diseases in the past 5 years?</label><br>
+<input type="radio" id="q7-yes" name="q7" value="yes" onclick="toggleExplanation(7)">Yes
+<input type="radio" id="q7-no" name="q7" value="no" onclick="toggleExplanation(7)">No<br>
+<div id="q7-explanation" style="display:none;">
+    <textarea name="q7-explanation" rows="4" cols="50" placeholder="Please Explain"></textarea>
+</div>
+<br>
+
+<p>       
+
+<label for="q8">8. Has any person to be insured ever been diagnosed with or treated for HIV/AIDS or other sexually transmitted diseases in the past 5 years?</label><br>
+<input type="radio" id="q8-yes" name="q8" value="yes" onclick="toggleExplanation(8)">Yes
+<input type="radio" id="q8-no" name="q8" value="no" onclick="toggleExplanation(8)">No<br>
+<div id="q8-explanation" style="display:none;">
+    <textarea name="q8-explanation" rows="4" cols="50" placeholder="Please Explain"></textarea>
+</div>
+<br>
+
+<p>
+
+        <!-- Question 9 -->
+<label>9. Within the past five years has any person proposed for insurance been diagnosed with, received treatment for, or been prescribed medication for any of the following conditions?</label><br>
+<p>
+
+<input type="checkbox" id="q9-a" name="q9-a">a. Alcoholism, Alcohol, Chemical Dependency, or Drug or Alcohol Abuse<br>
+<input type="checkbox" id="q9-b" name="q9-b">b. Autism Spectrum Disorders, Autism, Asperger’s Disorder, Rett’s Syndrome, Pervasive Developmental disorders, or Pervasive Developmental Delay<br>
+<input type="checkbox" id="q9-c" name="q9-c">c. Heart Disorder, Heart Disease, Heart Attack, Coronary Bypass<br>
+<input type="checkbox" id="q9-d" name="q9-d">d. Peripheral Vascular Disease or Peripheral Arterial Disease<br>
+<input type="checkbox" id="q9-e1" name="q9-e1">e. Diabetes (Insulin controlled)<br>
+<input type="checkbox" id="q9-e2" name="q9-e2">e. Crohn’s Disease or Ulcerative Colitis<br>
+<input type="checkbox" id="q9-f" name="q9-f">f. Lupus<br>
+<input type="checkbox" id="q9-g" name="q9-g">g. Osteomyelitis<br>
+<input type="checkbox" id="q9-h" name="q9-h">h. Paralysis<br>
+<input type="checkbox" id="q9-i" name="q9-i">i. Rheumatoid Arthritis<br>
+<input type="checkbox" id="q9-j" name="q9-j">j. Sickle cell anemia<br>
+<input type="checkbox" id="q9-k" name="q9-k">k. Stroke, Transient Ischemic Attack (TIA) or Brain Aneurysm<br>
+<input type="checkbox" id="q9-l" name="q9-l">l. Tuberculosis (TB).<br><br>
+<p>
+
+        
+        <!-- Questions 10 -->
+              <label for="q10">10. Is/are any proposed insured(s) now pregnant?</label><br>
+        <input type="radio" id="q10-yes" name="q10" value="yes">Yes
+        <input type="radio" id="q10-no" name="q10" value="no">No<br><br>
+<p>
+
+
+
+        <button type="submit">Submit</button>
+    </fieldset>
+</form>
+        
+        <!-- More fieldsets for other question groups here -->
+<script>
+    // Function to toggle the visibility of the explanation box based on the selected answer
+    function toggleExplanation(questionNumber) {
+        var yesInput = document.getElementById('q' + questionNumber + '-yes');
+        var explanationDiv = document.getElementById('q' + questionNumber + '-explanation');
+
+        if (yesInput.checked) {
+            explanationDiv.style.display = 'block';
+        } else {
+            explanationDiv.style.display = 'none';
+        }
+    }
+</script>
+
+<script
+        type="text/javascript"
+        src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"
+    ></script>
+
+    <script type="text/javascript">      
+        (function () {
+            emailjs.init("A50lpnF13ZR-C8m6D");
+        })();
+    </script>
+    <script>
+        document
+        .getElementById("historyForm")
+        .addEventListener("submit", function (event) {
+          event.preventDefault();
+
+          const serviceID = "service_t96lxws";
+          const templateID = "template_qeq1vcs";
+
+          // send the email here
+          emailjs.sendForm(serviceID, templateID, '#historyForm').then(
+            (response) => {
+              console.log("SUCCESS!", response.status, response.text);
+              alert("SUCCESS!");
+            },
+            (error) => {
+              console.log("FAILED...", error);
+              alert("FAILED...", error);
+            }
+          );
+        });
+    </script>
+</body>
+</html>
