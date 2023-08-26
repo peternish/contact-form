@@ -79,5 +79,5 @@ weightDependent1: {{weightDependent1}}
 Best wishes,
 Peter.
 
-### all information inside {{}} is the variable you get from form.
+### all information inside {{}} is the variable you get from form by their 'name' feature.
 
