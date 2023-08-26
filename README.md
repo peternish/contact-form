@@ -12,6 +12,7 @@ After adding a new service you can find your service id in your service item.
 ## template_id
 [EmailJs template](https://dashboard.emailjs.com/admin/templates) is kind of a model that defines the data format and exact data items(defined by 'name' in your form).
 Here is a sample template which I made for form 1.
+
 Hello {{person's name who will recieve this mail}},
 
 You got a new application message from {{email}} {{firstName}} {{lastName}}:
