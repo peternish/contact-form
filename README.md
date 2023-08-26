@@ -48,34 +48,6 @@ email: {{email}}
 
 phone: {{phone}}
 
-spouseFirstName: {{spouseFirstName}}
-
-spouseLastName: {{spouseLastName}}
-
-spouseDateOfBirth: {{spouseDob}}
-
-spouseStateOfBirth: {{spouseStateOfBirth}}
-
-spouseHeight: {{spouseHeight}}
-
-spouseWeight: {{spouseWeight}}
-
-spouseEmployer: {{spouseEmployer}}
-
-spouseOccupationDuties: {{spouseOccupationDuties}}
-
-spouseSsn: {{spouseSsn}}
-
-firstNameDependent1: {{firstNameDependent1}}
-
-lastNameDependent1: {{lastNameDependent1}}
-
-date of birth Dependent1: {{dobDependent1}}
-
-heightDependent1: {{heightDependent1}}
-
-weightDependent1: {{weightDependent1}}
-
 Best wishes,
 Peter.
 
